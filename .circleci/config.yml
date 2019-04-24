@@ -62,5 +62,5 @@ workflows:
           requires:
             - build
           filters:
-	      only:
-		- master
+	        only:
+		      - master
