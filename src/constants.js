@@ -1,8 +1,8 @@
 const STATUSES = {
-    FAIL: "fail",
-    PASS: "pass",
-    REMOVED: "removed",
-    WARN: "warn"
-};
+    FAIL: 'fail',
+    PASS: 'pass',
+    REMOVED: 'removed',
+    WARN: 'warn',
+}
 
-exports.STATUSES = STATUSES;
+exports.STATUSES = STATUSES

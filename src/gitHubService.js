@@ -1,18 +1,18 @@
-const axios = require("axios");
+const axios = require('axios')
 
-const logger = require("./logger");
+const logger = require('./logger')
 
 class GitHubService {
     constructor({ repoOwner, repoName, commitSha, githubAccessToken }) {
-        this.repoOwner = repoOwner;
-        this.repoName = repoName;
-        this.commitSha = commitSha;
-        this.githubAccessToken = githubAccessToken;
-        this.contexts = new Set();
+        this.repoOwner = repoOwner
+        this.repoName = repoName
+        this.commitSha = commitSha
+        this.githubAccessToken = githubAccessToken
+        this.contexts = new Set()
     }
 
     get repo() {
-        return `${this.repoOwner}/${this.repoName}`;
+        return `${this.repoOwner}/${this.repoName}`
     }
 
     get enabled() {
@@ -21,68 +21,68 @@ class GitHubService {
             this.repoOwner &&
             this.repoName &&
             this.commitSha
-        );
+        )
     }
 
     update(message, url, status) {
         if (!this.enabled) {
-            return Promise.resolve({});
+            return Promise.resolve({})
         }
 
-        const context = "commitwatch ";
+        const context = 'commitwatch '
 
         if (!this.contexts.has(context) && this.contexts.size >= 5) {
             logger.warn(
-                `Max reported statuses reached, github status will not be reported`
-            );
-            return Promise.resolve();
+                `Max reported statuses reached, github status will not be reported`,
+            )
+            return Promise.resolve()
         }
-        this.contexts.add(context);
+        this.contexts.add(context)
 
         return axios({
             data: {
                 context,
                 description: message,
                 state: status,
-                target_url: url
+                target_url: url,
             },
             headers: {
-                Authorization: `token ${this.githubAccessToken}`
+                Authorization: `token ${this.githubAccessToken}`,
             },
-            method: "POST",
-            responseType: "json",
+            method: 'POST',
+            responseType: 'json',
             timeout: 5000,
             url: `https://api.github.com/repos/${this.repo}/statuses/${
                 this.commitSha
-            }`
+            }`,
         }).catch(error => {
             if (error.response) {
                 logger.error(
                     `GitHubService HTTP_${error.response.status} :: ${
-                        error.response.data ? error.response.data.message : ""
-                    }`
-                );
-                return;
+                        error.response.data ? error.response.data.message : ''
+                    }`,
+                )
+                return
             }
-            throw error;
-        });
+            throw error
+        })
     }
 
     start({ message }) {
-        return this.update(message, undefined, "pending");
+        return this.update(message, undefined, 'pending')
     }
 
     pass({ message, url }) {
-        return this.update(message, url, "success");
+        return this.update(message, url, 'success')
     }
 
     fail({ message, url }) {
-        return this.update(message, url, "failure");
+        return this.update(message, url, 'failure')
     }
 
     error({ message }) {
-        return this.update(message, undefined, "error");
+        return this.update(message, undefined, 'error')
     }
 }
 
-module.exports = GitHubService;
+module.exports = GitHubService
