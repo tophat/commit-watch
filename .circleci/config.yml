@@ -108,6 +108,6 @@ workflows:
           requires:
               - website
           filters:
-              branches:
+            branches:
               only:
-                  - master
+                - master
