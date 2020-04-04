@@ -8,7 +8,7 @@
   "license": "MIT",
   "bin": "./lib/index.js",
   "files": [
-      "lib"
+    "lib"
   ],
   "devDependencies": {
     "@babel/cli": "^7.8.4",
@@ -30,6 +30,7 @@
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^3.0.0",
     "jest": "^25.2.7",
+    "jest-junit": "^10.0.0",
     "prettier": "^2.0.2"
   },
   "dependencies": {

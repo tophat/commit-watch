@@ -26,6 +26,11 @@ jobs:
           command: make lint
           when: always
 
+      - run:
+          name: Test
+          command: make test
+          when: always
+
       - store_artifacts:
           path: artifacts
 
