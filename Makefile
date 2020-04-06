@@ -54,7 +54,7 @@ lint: check-versions node_modules ${ARTIFACT_DIR}
 lint-fix: check-versions node_modules
 	$(shell yarn bin)/eslint --fix .
 
-# -------------- Linting --------------
+# -------------- Tests --------------
 
 .PHONY: test
 test:
