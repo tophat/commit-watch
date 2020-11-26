@@ -12,8 +12,8 @@ const getSingleCommitLintFailedMessage = commitResult =>
 const getMultipleCommitLintsFailedMessage = () =>
     'Multiple commit lint errors, run "make lint-commit-messages" locally'
 
-const getCommitLintResults = async () => {
-    const messages = await getCommitMessages()
+const getCommitLintResults = async ({ head }) => {
+    const messages = await getCommitMessages({ head })
     const lintedMessages = messages.map(m => lint(m, RULES))
     return await Promise.all(lintedMessages).then(reports => reports.flat())
 }
@@ -28,7 +28,7 @@ const getCommitResults = async () => {
         repoOwner: config.repoOwner,
     })
     await githubService.start({ message: 'Checking CommitWatch...' })
-    const results = await getCommitLintResults()
+    const results = await getCommitLintResults({ head: config.commitSha })
     let status = STATUSES.PASS
     let failSummary = ''
     const passSummary = 'All commit messages look good!'

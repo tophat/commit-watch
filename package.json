@@ -36,9 +36,9 @@
   "dependencies": {
     "@commitlint/format": "^11.0.0",
     "@commitlint/lint": "^11.0.0",
-    "@commitlint/read": "^11.0.0",
     "axios": "^0.21.0",
     "chalk": "^4.1.0",
+    "git-raw-commits": "^2.0.8",
     "junit-report-builder": "^2.1.0"
   },
   "engines": {
