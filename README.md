@@ -33,7 +33,7 @@ Optional:
 - `COMMIT_WATCH_OUTPUT_FILENAME`, defaults to 'commitwatch.junit.xml'.
 - `CI_BASE_BRANCH`, defaults to `origin/master`.
 
-In your CI run node ./node_modules/.bin/commit-watch or `yarn commit-watch`.
+In your CI run `npx commit-watch` or `yarn commit-watch`.
 
 ## Contributing
 

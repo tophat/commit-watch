@@ -33,8 +33,8 @@ jobs:
           run: yarn test
         - name: Build
           run: yarn build
-        - name: Upload Build Artifacts
+        - name: Upload Artifacts
           uses: actions/upload-artifact@v2
           with:
-            name: build-artifacts
+            name: reports-and-build-artifacts
             path: ${{ env.ARTIFACT_DIR }}
