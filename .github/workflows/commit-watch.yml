@@ -19,7 +19,7 @@ jobs:
           with:
             node-version: ${{ env.NODE_VERSION }}
         - name: Install Latest Commit Watch
-          run: yarn install -g commit-watch
+          run: yarn global add commit-watch
         - name: Run Commit Watch
           env:
             COMMITWATCH_GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
@@ -28,7 +28,7 @@ jobs:
             CI_BRANCH: ${{ github.head_ref }}
             CI_COMMIT_SHA: ${{ github.sha }}
             CI_BASE_BRANCH: ${{ github.base_ref }}
-          run: yarn commit-watch
+          run: node $(yarn global bin)/commit-watch
         - name: Upload Artifacts
           uses: actions/upload-artifact@v2
           with:
