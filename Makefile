@@ -24,6 +24,8 @@ help:
 	@echo "make lint-fix                        - attempts to autofix linting errors"
 	@echo "make watch                           - babelize locally for development"
 	@echo "make package                         - package (babelize) commitwatch ready for distribution"
+	@echo "make test                            - runs test suite"
+	@echo "make test-watch                      - runs modified tests on file change"
 
 # ---- Installing, Building and Running ----
 
@@ -59,6 +61,10 @@ lint-fix: check-versions node_modules
 .PHONY: test
 test:
 	$(JEST_ENV_VARIABLES) $(shell yarn bin)/jest ${JEST_EXTRA_ARGS}
+
+.PHONY: test-watch
+test-watch:
+	$(JEST_ENV_VARIABLES) $(shell yarn bin)/jest --watch ${JEST_EXTRA_ARGS}
 
 # --------------- CI Scripts -----------------
 

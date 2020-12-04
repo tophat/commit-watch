@@ -31,5 +31,6 @@ The most efficient way to get this running is to ensure that some environment va
 Optional:
 - `COMMIT_WATCH_OUTPUT_DIR`, defaults to './artifacts/test_results/commitwatch/'.
 - `COMMIT_WATCH_OUTPUT_FILENAME`, defaults to 'commitwatch.junit.xml'.
+- `CI_BASE_BRANCH`, defaults to `origin/master`.
 
 In your CI run node ./node_modules/.bin/commit-watch or `yarn commit-watch`.
