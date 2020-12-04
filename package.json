@@ -6,6 +6,17 @@
   "repository": "git@github.com:tophat/commit-watch.git",
   "author": "Top Hat Monocle Corp. <opensource@tophat.com>",
   "license": "MIT",
+  "scripts": {
+      "clean": "rm -rf ${ARTIFACT_DIR:-artifacts} lib node_modules",
+      "test": "jest",
+      "test:watch": "jest --watch",
+      "lint": "eslint . --format junit --output-file ${ARTIFACT_DIR:-artifacts}/test_results/eslint/eslint.junit.xml",
+      "lint:fix": "eslint . --fix",
+      "build:babel": "rm -rf lib && yarn babel src --out-dir=lib --copy-files --no-copy-ignored --ignore 'src/**/*.test.js'",
+      "build:package": "yarn pack --filename artifacts/package.tgz",
+      "build": "yarn build:babel && yarn build:package",
+      "deploy": "yarn publish ./artifacts/package.tgz --access public"
+  },
   "bin": "./lib/index.js",
   "files": [
     "lib"
