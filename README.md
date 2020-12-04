@@ -34,3 +34,33 @@ Optional:
 - `CI_BASE_BRANCH`, defaults to `origin/master`.
 
 In your CI run node ./node_modules/.bin/commit-watch or `yarn commit-watch`.
+
+## Contributing
+
+Ensure you are using the correct version of node. It should match the version specified in `.nvmrc`. You can use a tool such as [nvm](https://github.com/nvm-sh/nvm) to automate this process.
+
+Install packages:
+
+```shell
+yarn
+```
+
+To run tests:
+
+```shell
+yarn test
+```
+
+And watch mode:
+
+```shell
+yarn test:watch
+```
+
+You can build the package via:
+
+```
+yarn build
+```
+
+Set the `CI=1` env variable to generate a test coverage report.
