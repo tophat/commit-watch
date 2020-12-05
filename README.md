@@ -1,6 +1,6 @@
 # CommitWatch
 
-<span><img align="right" src="./docs/logo.png" alt="Logo"></span>
+<span><img align="right" src="./assets/logo.png" alt="Commit Watch Logo"></span>
 
 CommitWatch checks commit messages and ensures they're formatted based on your config preferences.
 
