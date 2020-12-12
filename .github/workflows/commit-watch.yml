@@ -13,6 +13,9 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
         - uses: actions/checkout@v2
+          with:
+            ref: ${{ github.event.pull_request.head.sha }}
+            fetch-depth: 0
         - name: Run Commit Watch
           env:
             COMMIT_WATCH_OUTPUT_DIR: ${{ env.ARTIFACT_DIR }}/
