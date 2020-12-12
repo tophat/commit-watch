@@ -12,7 +12,7 @@ jobs:
     name: Run Commit Watch
     runs-on: ubuntu-18.04
     steps:
-        - uses: actions/checkout@v1
+        - uses: actions/checkout@v2
         - name: Run Commit Watch
           env:
             COMMIT_WATCH_OUTPUT_DIR: ${{ env.ARTIFACT_DIR }}/
