@@ -26,7 +26,6 @@ jobs:
             path: ./.yarn/cache
             key: ${{ env.NODE_VERSION }}-${{ env.YARN_VERSION }}-${{ hashFiles('yarn.lock') }}
         - name: Install node_modules
-          if: steps.yarn-cache.outputs.cache-hit != 'true'
           run: yarn install --immutable
         - name: Build Package
           run: yarn build
