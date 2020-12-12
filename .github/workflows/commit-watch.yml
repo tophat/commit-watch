@@ -23,4 +23,4 @@ jobs:
             CI_COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
             CI_BASE_BRANCH: ${{ github.base_ref }}
             VERBOSE: 1
-          run: git log master
+          run: git log origin/master
