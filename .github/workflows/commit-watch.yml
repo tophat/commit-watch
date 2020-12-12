@@ -28,7 +28,7 @@ jobs:
             CI_COMMIT_SHA: ${{ github.sha }}
             CI_BASE_BRANCH: ${{ github.base_ref }}
             VERBOSE: 1
-          run: yarn dlx commit-watch
+          run: yarn && yarn build && yarn node ./lib/index.js
         - name: Upload Artifacts
           uses: actions/upload-artifact@v2
           with:
