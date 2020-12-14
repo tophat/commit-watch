@@ -31,7 +31,6 @@ jobs:
             CI_REPO_NAME: ${{ github.event.repository.name }}
             CI_COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
             CI_BASE_BRANCH: ${{ github.base_ref }}
-            VERBOSE: 1
           run: yarn dlx commit-watch
         - name: Upload Artifacts
           uses: actions/upload-artifact@v2
