@@ -30,7 +30,8 @@
       "contributions": [
         "infra",
         "doc",
-        "tool"
+        "tool",
+        "bug"
       ]
     },
     {
