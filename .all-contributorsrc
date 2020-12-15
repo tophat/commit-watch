@@ -1,0 +1,27 @@
+{
+  "projectName": "commit-watch",
+  "projectOwner": "tophat",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "sdcosta",
+      "name": "Shouvik DCosta",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/6020693?v=4",
+      "profile": "https://opensource.tophat.com/",
+      "contributions": [
+        "code",
+        "doc",
+        "ideas",
+        "infra"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}
