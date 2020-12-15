@@ -4,7 +4,7 @@
 
 [![Maturity badge - level 2](https://img.shields.io/badge/Maturity-Level%202%20--%20First%20Release-yellowgreen.svg)](https://github.com/tophat/getting-started/blob/master/scorecard.md) [![GitHub license](https://img.shields.io/github/license/tophat/commit-watch)](https://github.com/tophat/commit-watch/blob/master/LICENSE) [![Slack workspace](https://slackinvite.dev.tophat.com/badge.svg)](https://opensource.tophat.com/slack)
 
-![npm](https://img.shields.io/npm/v/commit-watch) ![node-current](https://img.shields.io/node/v/commit-watch) ![npm](https://img.shields.io/npm/dm/commit-watch)
+![npm](https://img.shields.io/npm/v/commit-watch) ![node-current](https://img.shields.io/node/v/commit-watch) ![npm](https://img.shields.io/npm/dm/commit-watch) [![codecov](https://codecov.io/gh/tophat/commit-watch/branch/master/graph/badge.svg?token=eBYKrg0Vaw)](https://codecov.io/gh/tophat/commit-watch)
 
 
 ## Overview
