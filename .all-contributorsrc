@@ -42,6 +42,19 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "noahnu",
+      "name": "Noah",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/1297096?v=4",
+      "profile": "https://noahnu.com/",
+      "contributions": [
+        "bug",
+        "infra",
+        "tool",
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7
