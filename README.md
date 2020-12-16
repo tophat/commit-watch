@@ -31,7 +31,7 @@ Or just run it directly in CI via `npx commit-watch` or `yarn dlx commit-watch`.
 
 Before running commit-watch, you need to ensure the relevant environment variables are set. For a full list of required and optional environment variables, see the section below.
 
-### Environment Variables:
+### Configuration Variables:
 
 | Name                         | Value                                                | Description                                                                                          |
 |------------------------------|------------------------------------------------------|------------------------------------------------------------------------------------------------------|
@@ -43,6 +43,23 @@ Before running commit-watch, you need to ensure the relevant environment variabl
 | COMMIT_WATCH_OUTPUT_DIR      | Defaults to `./artifacts/test_results/commitwatch/`. | Directory to write the junit report to.                                                              |
 | COMMIT_WATCH_OUTPUT_FILENAME | Defaults to `commitwatch.junit.xml`.                 | The name of the junit report.                                                                        |
 | VERBOSE                      | Defaults to `0`.                                     | Whether to enable verbose mode.                                                                      |
+
+These variables can be set in the folowing ways: 
+1. By having environment variables with matching names.
+2. By specifying a config file containing the variables when running the command.
+3. By specifying the variables in the command line arguments when running the command. 
+
+To use specify a config file use the --config-file cli argument to pass in the relative path of the file.
+
+To pass in any specific config parameter as a command line argument use the parameter name as a cli argument.
+ex. commit-watch --COMMITWATCH_GITHUB_TOKEN password123
+
+If config parameters are present from multiple sources they are used in the following order:
+
+1. Configs passed in as cli args
+2. Configs from a config file
+3. Environment variable configs
+
 
 ## Contributors ✨
 
