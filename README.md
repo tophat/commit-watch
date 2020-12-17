@@ -50,9 +50,13 @@ These variables can be set in the folowing ways:
 3. By specifying the variables in the command line arguments when running the command. 
 
 To use specify a config file use the --config-file cli argument to pass in the relative path of the file.
-ex. commit-watch --config-file commit-watch.config.js 
-	`commit-watch.config.js`
-	```
+
+ex. commit-watch --config-file commit-watch.config.js     
+    
+    
+    //commit-watch.coinfig.js
+    
+	
 	module.exports = {
 	    CI_REPO_OWNER: 'Hans Moleman',
 	    CI_REPO_NAME: 'manahattan-project',
@@ -61,11 +65,12 @@ ex. commit-watch --config-file commit-watch.config.js
 	    OUTPUT_FILENAME: 'myreport.juint.xml',
 	    VERBOSE: true,
 	}
-    ```
+    
 
 
 
 To pass in any specific config parameter as a command line argument use the parameter name as a cli argument.
+
 ex. commit-watch --github-token password123
 
 If config parameters are present from multiple sources they are used in the following order:
