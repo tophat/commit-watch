@@ -12,7 +12,8 @@ const getSingleCommitLintFailedMessage = commitResult =>
 const getMultipleCommitLintsFailedMessage = () =>
     'Multiple commit lint errors, please ensure your commit messages conform to the conventional commit spec.'
 
-const conventionalCommitSpecLink = "https://www.conventionalcommits.org/en/v1.0.0/"
+const conventionalCommitSpecLink =
+    'https://www.conventionalcommits.org/en/v1.0.0/'
 
 const getCommitLintResults = async () => {
     const messages = await getCommitMessages()
