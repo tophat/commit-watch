@@ -10,7 +10,9 @@ const getSingleCommitLintFailedMessage = commitResult =>
     `Fix commit lint errors - "${commitResult.input}"`
 
 const getMultipleCommitLintsFailedMessage = () =>
-    'Multiple commit lint errors, run "make lint-commit-messages" locally'
+    'Multiple commit lint errors, please ensure your commit messages conform to the conventional commit spec.'
+
+const conventionalCommitSpecLink = "https://www.conventionalcommits.org/en/v1.0.0/"
 
 const getCommitLintResults = async () => {
     const messages = await getCommitMessages()
@@ -53,6 +55,7 @@ const getCommitResults = async () => {
             githubServicePromises.push(
                 githubService.fail({
                     message: getMultipleCommitLintsFailedMessage(),
+                    url: conventionalCommitSpecLink,
                 }),
             )
             const commitWatchMessage = getSingleCommitLintFailedMessage(
