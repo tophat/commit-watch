@@ -34,10 +34,8 @@ const main = async () => {
         buildJunitFile({
             lintFailures: results.lintFailures,
             outputDir:
-                configs.COMMIT_WATCH_OUTPUT_DIR ??
-                'artifacts/test_results/commitwatch/',
-            outputFilename:
-                configs.COMMIT_WATCH_OUTPUT_FILENAME ?? 'commitwatch.junit.xml',
+                configs.OUTPUT_DIR ?? 'artifacts/test_results/commitwatch/',
+            outputFilename: configs.OUTPUT_FILENAME ?? 'commitwatch.junit.xml',
         })
         return EXIT_FAILURE
     }

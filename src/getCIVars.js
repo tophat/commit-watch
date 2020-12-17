@@ -13,7 +13,7 @@ const getRepo = configs => {
 const getCIVars = configs => {
     const commitSha = configs.CI_COMMIT_SHA || configs.GIT_COMMIT
     const baseBranch = configs.CI_BASE_BRANCH || 'origin/master'
-    const githubAccessToken = configs.COMMITWATCH_GITHUB_TOKEN
+    const githubAccessToken = configs.GITHUB_TOKEN
 
     const repo = getRepo(configs)
     const repoOwner = configs.CI_REPO_OWNER || repo?.split('/')[0]

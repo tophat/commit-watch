@@ -31,7 +31,16 @@ describe('getBaseConfigs', () => {
 
     it('Uses environment variables as config \
 		if not provided config file or cli configs', () => {
-        expect(getBaseConfigs()).toEqual(ENV_VARIABLE_CONFIGS)
+        expect(getBaseConfigs()).toEqual({
+            GITHUB_TOKEN: ENV_VARIABLE_CONFIGS.COMMITWATCH_GITHUB_TOKEN,
+            OUTPUT_DIR: ENV_VARIABLE_CONFIGS.COMMIT_WATCH_OUTPUT_DIR,
+            OUTPUT_FILENAME: ENV_VARIABLE_CONFIGS.COMMIT_WATCH_OUTPUT_FILENAME,
+            VERBOSE: ENV_VARIABLE_CONFIGS.VERBOSE,
+            CI_BASE_BRANCH: ENV_VARIABLE_CONFIGS.CI_BASE_BRANCH,
+            CI_COMMIT_SHA: ENV_VARIABLE_CONFIGS.CI_COMMIT_SHA,
+            CI_REPO_OWNER: ENV_VARIABLE_CONFIGS.CI_REPO_OWNER,
+            CI_REPO_NAME: ENV_VARIABLE_CONFIGS.CI_REPO_NAME,
+        })
     })
 
     it('Values from env variables are overwritten when a \
@@ -40,31 +49,30 @@ describe('getBaseConfigs', () => {
 
         expect(getBaseConfigs()).toEqual({
             ...CONFIG_FILE_CONFIGS,
-            COMMITWATCH_GITHUB_TOKEN:
-                ENV_VARIABLE_CONFIGS.COMMITWATCH_GITHUB_TOKEN,
+            GITHUB_TOKEN: ENV_VARIABLE_CONFIGS.COMMITWATCH_GITHUB_TOKEN,
         })
     })
 
     it('Config vales passed in as cli args overwrite\
 		values from config file and values from env variables', () => {
-        const mockCommitWatchGithubToken = 'MOCK_COMMITWATCH_GITHUB_TOKEN'
-        const mockCommitatchOutputDir = 'MOCK_COMMIT_WATCH_OUTPUT_DIR'
+        const mockGithubToken = 'MOCK_GITHUB_TOKEN'
+        const mockOutputDir = 'MOCK_OUTPUT_DIR'
 
         process.argv = [
             '_',
             '_',
             '--config-file',
             'src/tests/mock.config.js',
-            '--COMMITWATCH_GITHUB_TOKEN',
-            mockCommitWatchGithubToken,
-            '--COMMIT_WATCH_OUTPUT_DIR',
-            mockCommitatchOutputDir,
+            '--github-token',
+            mockGithubToken,
+            '--output-dir',
+            mockOutputDir,
         ]
 
         expect(getBaseConfigs()).toEqual({
             ...CONFIG_FILE_CONFIGS,
-            COMMIT_WATCH_OUTPUT_DIR: mockCommitatchOutputDir,
-            COMMITWATCH_GITHUB_TOKEN: mockCommitWatchGithubToken,
+            OUTPUT_DIR: mockOutputDir,
+            GITHUB_TOKEN: mockGithubToken,
         })
     })
 })
