@@ -46,13 +46,27 @@ Before running commit-watch, you need to ensure the relevant environment variabl
 
 These variables can be set in the folowing ways: 
 1. By having environment variables with matching names.
-2. By specifying a config file containing the variables when running the command.
+2. By specifying a .js config file containing the variables when running the command.
 3. By specifying the variables in the command line arguments when running the command. 
 
 To use specify a config file use the --config-file cli argument to pass in the relative path of the file.
+ex. commit-watch --config-file commit-watch.config.js 
+	`commit-watch.config.js`
+	```
+	module.exports = {
+	    CI_REPO_OWNER: 'Hans Moleman',
+	    CI_REPO_NAME: 'manahattan-project',
+	    CI_BASE_BRANCH: 'develop',
+	    OUTPUT_DIR: 'junit_reports',
+	    OUTPUT_FILENAME: 'myreport.juint.xml',
+	    VERBOSE: true,
+	}
+    ```
+
+
 
 To pass in any specific config parameter as a command line argument use the parameter name as a cli argument.
-ex. commit-watch --COMMITWATCH_GITHUB_TOKEN password123
+ex. commit-watch --github-token password123
 
 If config parameters are present from multiple sources they are used in the following order:
 
