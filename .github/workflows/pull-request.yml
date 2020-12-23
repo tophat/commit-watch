@@ -22,7 +22,7 @@ jobs:
             extra_plugins: |
                 @semantic-release/changelog
                 @semantic-release/git
-        env:
+          env:
             GH_TOKEN: ${{ secrets.GH_TOKEN }}
         - uses: ./.github/actions/detect-node
         - name: Setup Node.js
