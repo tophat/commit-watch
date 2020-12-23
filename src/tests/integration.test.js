@@ -119,8 +119,12 @@ describe('Integration', () => {
             expect(requests[0].state).toEqual('pending')
             expect(requests[1].state).toEqual('failure')
             expect(requests[2].state).toEqual('failure')
-            expect(requests[2].description).toEqual('Multiple commit lint errors, please ensure your commit messages conform to the conventional commit spec.')
-            expect(requests[2].target_url).toEqual('https://www.conventionalcommits.org/en/v1.0.0/')
+            expect(requests[2].description).toEqual(
+                'Multiple commit lint errors, please ensure your commit messages conform to the conventional commit spec.',
+            )
+            expect(requests[2].target_url).toEqual(
+                'https://www.conventionalcommits.org/en/v1.0.0/',
+            )
         })
 
         it('reports success to github', async () => {
