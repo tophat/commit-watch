@@ -57,6 +57,20 @@ jobs:
           with:
             persist-credentials: false
         - uses: ./.github/actions/detect-env
+        - name: Setup Node.js
+          uses: actions/setup-node@v1
+          with:
+            node-version: ${{ env.NODE_VERSION }}
+        - name: Create artifacts directory
+          run: mkdir -p ${{ env.ARTIFACT_DIR }}
+        - name: Restore yarn cache
+          id: yarn-cache
+          uses: actions/cache@v2
+          with:
+            path: ./.yarn/cache
+            key: ${{ env.NODE_VERSION }}-${{ env.YARN_VERSION }}-${{ hashFiles('yarn.lock') }}
+        - name: Install dependencies
+          run: yarn install --immutable
         - uses: actions/download-artifact@v2
           with:
             name: reports-and-build-artifacts
@@ -69,6 +83,7 @@ jobs:
             npm config set registry=https://registry.npmjs.org/
             npm config set "//registry.npmjs.org/:_authToken" "${NPM_PUBLISH_TOKEN}"
         - name: Publish Package
+          if: github.ref == 'refs/heads/master'
           run: yarn deploy
         - name: Semantic Release
           uses: cycjimmy/semantic-release-action@v2
