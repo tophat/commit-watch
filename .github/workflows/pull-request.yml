@@ -16,7 +16,7 @@ jobs:
           with:
             ref: ${{ github.event.pull_request.head.sha }}
         - name: Semantic Release
-        - uses: cycjimmy/semantic-release-action@v2
+          uses: cycjimmy/semantic-release-action@v2
           with:
             dry_run: true
             extra_plugins: |
