@@ -4,59 +4,115 @@ import getCIVars from './getCIVars'
 import ensureValid from './ensureValid'
 import { parseConfigFile } from './parseConfigFile'
 
-const SUPPORTED_CONFIGS = [
-    'GITHUB_TOKEN',
-    'CI_REPO_OWNER',
-    'CI_REPO_NAME',
-    'CI_COMMIT_SHA',
-    'CI_BASE_BRANCH',
-    'OUTPUT_DIR',
-    'OUTPUT_FILENAME',
-    'VERBOSE',
-]
-
-const SUPPORTED_CONFIGS_ENV_VARS = [
-    { envVarName: 'COMMITWATCH_GITHUB_TOKEN', configName: 'GITHUB_TOKEN' },
-    { envVarName: 'CI_REPO_OWNER', configName: 'CI_REPO_OWNER' },
-    { envVarName: 'CI_REPO_NAME', configName: 'CI_REPO_NAME' },
-    { envVarName: 'CI_COMMIT_SHA', configName: 'CI_COMMIT_SHA' },
-    { envVarName: 'CI_BASE_BRANCH', configName: 'CI_BASE_BRANCH' },
-    { envVarName: 'COMMIT_WATCH_OUTPUT_DIR', configName: 'OUTPUT_DIR' },
+const SUPPORTED_CONFIGS_VARS = [
+    {
+        envVarName: 'COMMITWATCH_GITHUB_TOKEN',
+        cliVarName: 'github-token',
+        fileVarName: 'githubToken',
+        configName: 'GITHUB_TOKEN',
+    },
+    {
+        envVarName: 'CI_REPO_OWNER',
+        cliVarName: 'ci-repo-owner',
+        fileVarName: 'ciRepoOwner',
+        configName: 'CI_REPO_OWNER',
+    },
+    {
+        envVarName: 'CI_REPO_NAME',
+        cliVarName: 'ci-repo-name',
+        fileVarName: 'ciRepoName',
+        configName: 'CI_REPO_NAME',
+    },
+    {
+        envVarName: 'GIT_URL',
+        cliVarName: 'git-url',
+        fileVarName: 'gitUrl',
+        configName: 'GIT_URL',
+    },
+    {
+        envVarName: 'CI_COMMIT_SHA',
+        cliVarName: 'ci-commit-sha',
+        fileVarName: 'ciCommitSha',
+        configName: 'CI_COMMIT_SHA',
+    },
+    {
+        envVarName: 'CI_BASE_BRANCH',
+        cliVarName: 'ci-base-branch',
+        fileVarName: 'ciBaseBranch',
+        configName: 'CI_BASE_BRANCH',
+    },
+    {
+        envVarName: 'COMMIT_WATCH_OUTPUT_DIR',
+        cliVarName: 'output-dir',
+        fileVarName: 'outputDir',
+        configName: 'OUTPUT_DIR',
+    },
     {
         envVarName: 'COMMIT_WATCH_OUTPUT_FILENAME',
+        cliVarName: 'output-filename',
+        fileVarName: 'outputFilename',
         configName: 'OUTPUT_FILENAME',
     },
-    { envVarName: 'VERBOSE', configName: 'VERBOSE' },
+    {
+        envVarName: 'VERBOSE',
+        cliVarName: 'verbose',
+        fileVarName: 'verbose',
+        configName: 'VERBOSE',
+    },
 ]
 
 const getCLIArgs = () => minimist(process.argv.slice(2))
 
 export const getBaseConfigs = () => {
-    let configs = SUPPORTED_CONFIGS_ENV_VARS.reduce(
-        (acc, nextConfig) => ({
-            ...acc,
-            [nextConfig.configName]: process.env[nextConfig.envVarName],
-        }),
-        {},
-    )
+    const filterUndefineds = obj =>
+        Object.keys(obj).reduce((acc, currKey) => {
+            if (!obj[currKey]) {
+                return acc
+            }
+
+            return {
+                ...acc,
+                [currKey]: obj[currKey],
+            }
+        }, {})
 
     const cliArgs = getCLIArgs()
 
-    if (cliArgs['config-file']) {
-        configs = { ...configs, ...parseConfigFile(cliArgs['config-file']) }
+    const configFileArgs = cliArgs['config-file']
+        ? parseConfigFile(cliArgs['config-file'])
+        : {}
+
+    const {
+        envConfigs,
+        fileConfigs,
+        cliConfigs,
+    } = SUPPORTED_CONFIGS_VARS.reduce(
+        (acc, nextConfig) => ({
+            envConfigs: {
+                ...acc.envConfigs,
+                [nextConfig.configName]: process.env[nextConfig.envVarName],
+            },
+            fileConfigs: {
+                ...acc.fileConfigs,
+                [nextConfig.configName]: configFileArgs[nextConfig.fileVarName],
+            },
+            cliConfigs: {
+                ...acc.cliConfigs,
+                [nextConfig.configName]: cliArgs[nextConfig.cliVarName],
+            },
+        }),
+        {
+            envConfigs: {},
+            fileConfigs: {},
+            cliConfigs: {},
+        },
+    )
+
+    return {
+        ...filterUndefineds(envConfigs),
+        ...filterUndefineds(fileConfigs),
+        ...filterUndefineds(cliConfigs),
     }
-
-    SUPPORTED_CONFIGS.forEach(supportedConfigKey => {
-        const commandLineArgKey = supportedConfigKey
-            .toLowerCase()
-            .replace('_', '-')
-
-        if (cliArgs[commandLineArgKey]) {
-            configs[supportedConfigKey] = cliArgs[commandLineArgKey]
-        }
-    })
-
-    return configs
 }
 
 const getConfig = customConfig => {

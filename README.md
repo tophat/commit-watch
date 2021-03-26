@@ -38,34 +38,36 @@ Before running commit-watch, you need to ensure the relevant environment variabl
 | COMMITWATCH_GITHUB_TOKEN     | Required                                             | Personal access token with write access to GitHub status checks, and read access to your repository. |
 | CI_REPO_OWNER                | Required                                             | The "owner" from https://github.com/\<owner\>/\<name\>.                                              |
 | CI_REPO_NAME                 | Required                                             | The "name" from https://github.com/\<owner\>/\<name\>. That is, your repository name.                |
+| GIT_URL                      | Not Required                                         | The full Git URL from git@github.com:\<owner\>/\<name\>.git. That is, the URL you'd use to clone your repository.  |
 | CI_COMMIT_SHA                | Required                                             | The commit sha to run the linter against.                                                            |
 | CI_BASE_BRANCH               | Defaults to `origin/master`.                         | The base branch to compare the commit sha against.                                                   |
 | COMMIT_WATCH_OUTPUT_DIR      | Defaults to `./artifacts/test_results/commitwatch/`. | Directory to write the junit report to.                                                              |
 | COMMIT_WATCH_OUTPUT_FILENAME | Defaults to `commitwatch.junit.xml`.                 | The name of the junit report.                                                                        |
 | VERBOSE                      | Defaults to `0`.                                     | Whether to enable verbose mode.                                                                      |
 
-These variables can be set in the folowing ways: 
+These variables can be set in the folowing ways:
 1. By having environment variables with matching names.
 2. By specifying a .js config file containing the variables when running the command.
-3. By specifying the variables in the command line arguments when running the command. 
+3. By specifying the variables in the command line arguments when running the command.
 
 To use specify a config file use the --config-file cli argument to pass in the relative path of the file.
 
-ex. commit-watch --config-file commit-watch.config.js     
-    
-    
-    //commit-watch.coinfig.js
-    
-	
-	module.exports = {
-	    CI_REPO_OWNER: 'Hans Moleman',
-	    CI_REPO_NAME: 'manahattan-project',
-	    CI_BASE_BRANCH: 'develop',
-	    OUTPUT_DIR: 'junit_reports',
-	    OUTPUT_FILENAME: 'myreport.juint.xml',
-	    VERBOSE: true,
-	}
-    
+ex. commit-watch --config-file commit-watch.config.js
+
+```javascript
+//commit-watch.config.js
+
+
+module.exports = {
+    ciRepoOwner: 'Hans Moleman',
+    ciRepoName: 'manahattan-project',
+    ciBaseBranch: 'develop',
+    outputDir: 'junit_reports',
+    outputFilename: 'myreport.juint.xml',
+    gitUrl: 'git@github.com:EXAMPLE_ORG/EXAMPLE_REPO.git',
+    verbose: true,
+}
+```
 
 
 

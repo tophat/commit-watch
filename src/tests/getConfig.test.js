@@ -1,4 +1,4 @@
-import { getBaseConfigs } from '../getConfig'
+import getConfig, { getBaseConfigs } from '../getConfig'
 
 import CONFIG_FILE_CONFIGS from './mock.config'
 
@@ -16,6 +16,17 @@ describe('getBaseConfigs', () => {
         COMMIT_WATCH_OUTPUT_FILENAME: 'COMMIT_WATCH_OUTPUT_FILENAME_ENV',
         VERBOSE: 'VERBOSE_ENV',
     }
+
+    const fileConfigToConfig = fileConfig =>
+        Object.keys(fileConfig).reduce(
+            (acc, currKey) => ({
+                ...acc,
+                [currKey.replace(/([A-Z])/g, '_$1').toUpperCase()]: fileConfig[
+                    currKey
+                ],
+            }),
+            {},
+        )
 
     beforeAll(() => {
         process.env = ENV_VARIABLE_CONFIGS
@@ -48,12 +59,12 @@ describe('getBaseConfigs', () => {
         process.argv = ['_', '_', '--config-file', 'src/tests/mock.config.js']
 
         expect(getBaseConfigs()).toEqual({
-            ...CONFIG_FILE_CONFIGS,
+            ...fileConfigToConfig(CONFIG_FILE_CONFIGS),
             GITHUB_TOKEN: ENV_VARIABLE_CONFIGS.COMMITWATCH_GITHUB_TOKEN,
         })
     })
 
-    it('Config vales passed in as cli args overwrite\
+    it('Config values passed in as cli args overwrite\
 		values from config file and values from env variables', () => {
         const mockGithubToken = 'MOCK_GITHUB_TOKEN'
         const mockOutputDir = 'MOCK_OUTPUT_DIR'
@@ -70,9 +81,31 @@ describe('getBaseConfigs', () => {
         ]
 
         expect(getBaseConfigs()).toEqual({
-            ...CONFIG_FILE_CONFIGS,
+            ...fileConfigToConfig(CONFIG_FILE_CONFIGS),
             OUTPUT_DIR: mockOutputDir,
             GITHUB_TOKEN: mockGithubToken,
+        })
+    })
+
+    it('Correctly retrieves the repo name and owner from the GitHub URL if\
+        no repo name and owner is given', () => {
+        const mockRepoOwner = 'EXAMPLE_CORP'
+        const mockRepoName = 'EXAMPLE_REPO'
+        const mockRepo = `${mockRepoOwner}/${mockRepoName}`
+
+        process.env = {
+            ...ENV_VARIABLE_CONFIGS,
+            CI_REPO_OWNER: undefined,
+            CI_REPO_NAME: undefined,
+            GIT_URL: `git@github.com:${mockRepo}.git`,
+        }
+
+        expect(getConfig()).toEqual({
+            commitSha: ENV_VARIABLE_CONFIGS.CI_COMMIT_SHA,
+            baseBranch: ENV_VARIABLE_CONFIGS.CI_BASE_BRANCH,
+            githubAccessToken: ENV_VARIABLE_CONFIGS.COMMITWATCH_GITHUB_TOKEN,
+            repoOwner: mockRepoOwner,
+            repoName: mockRepoName,
         })
     })
 })
