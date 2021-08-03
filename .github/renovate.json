@@ -1,5 +1,5 @@
 {
   "extends": [
-    "github>tophat/new-repo-kit//blob/master/.github/renovate"
+    "github>tophat/new-project-kit//.github/renovate"
   ]
 }
