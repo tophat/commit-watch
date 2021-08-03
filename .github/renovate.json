@@ -1,0 +1,5 @@
+{
+  "extends": [
+    "github>tophat/new-repo-kit//.github/renovate"
+  ]
+}
