@@ -1302,13 +1302,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/format@npm:^11.0.0":
-  version: 11.0.0
-  resolution: "@commitlint/format@npm:11.0.0"
+"@commitlint/format@npm:^13.0.0":
+  version: 13.1.0
+  resolution: "@commitlint/format@npm:13.1.0"
   dependencies:
-    "@commitlint/types": ^11.0.0
+    "@commitlint/types": ^13.1.0
     chalk: ^4.0.0
-  checksum: 4080e0b2e95826a61a755e94019fc0c93370c0affa8634d1f6852ecfdcf347e914d6e4e9ab15a3080fa585fe9d7aa8fe27ed4a02c7d05528c5c19ac60cfbbd66
+  checksum: 1c31cae9dd6d05dc098bfc877441f5657f49c6b7f62db517b3323756725f99ef04fcd4263755a187a898160515cf16e750f68da83c1638060fe0881a013028ba
   languageName: node
   linkType: hard
 
@@ -1374,6 +1374,15 @@ __metadata:
   version: 11.0.0
   resolution: "@commitlint/types@npm:11.0.0"
   checksum: 1f9ec3ad3a2243bc54901fc5458f4e5cfb72ac984bd5af2e7b0d1220a098d7ffcef74e5d087ef7c3b45d5b3c3c73c8b2ae1d0afc8c2175ca2b812dc04f726d5f
+  languageName: node
+  linkType: hard
+
+"@commitlint/types@npm:^13.1.0":
+  version: 13.1.0
+  resolution: "@commitlint/types@npm:13.1.0"
+  dependencies:
+    chalk: ^4.0.0
+  checksum: 423ce7af4db4a0e83cd3ad360b7a435915198c0ee6a353975e38761fee60a03a71110c3abe332bd52b0caa0219f5ca8a2ccdba574c0031b838a6ac8994d11623
   languageName: node
   linkType: hard
 
@@ -3233,7 +3242,7 @@ __metadata:
     "@babel/cli": ^7.14.8
     "@babel/core": ^7.15.0
     "@babel/preset-env": ^7.15.0
-    "@commitlint/format": ^11.0.0
+    "@commitlint/format": ^13.0.0
     "@commitlint/lint": ^11.0.0
     "@tophat/eslint-config": ^0.6.1
     "@yarnpkg/sdks": ^2.4.2-rc.1
