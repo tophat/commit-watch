@@ -41,7 +41,7 @@
     "all-contributors-cli": "^6.19.0",
     "axios-mock-adapter": "^1.19.0",
     "babel-eslint": "^10.1.0",
-    "babel-jest": "^26.6.3",
+    "babel-jest": "^27.0.0",
     "eslint": "^7.19.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-import-resolver-node": "^0.3.4",
