@@ -34,7 +34,7 @@
     "@babel/cli": "^7.17.0",
     "@babel/core": "^7.17.2",
     "@babel/preset-env": "^7.16.11",
-    "@monodeploy/plugin-github": "0.4.0-rc.2",
+    "@monodeploy/plugin-github": "0.6.1",
     "@tophat/conventional-changelog-config": "^0.6.0",
     "@tophat/eslint-config": "^0.6.1",
     "@yarnpkg/sdks": "^2.6.0-rc.6",
